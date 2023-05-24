@@ -1,0 +1,15 @@
+asset
+
+asset that are required for app: are generally stored in "src/assets".
+
+? Where to store ?
+if your app can compile without it, you can keep it in the public folder.
+
+? How to import ?
+
+import cat form './assets/images/cat.jpg';
+<img src={cat} alt="A picture of a cat" />
+
+## alternative
+// require is not work in vite
+<img src={require('./assets/images/cat.jpg')} alt="A picture of a cat" />

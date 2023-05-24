@@ -14,6 +14,11 @@ import { Route, Routes, Link } from "react-router-dom";
 import HomePage from "../components/HomePage";
 import AboutMe from "../components/AboutMe";
 
+import ReactPlayer from "react-player";
+
+// assets
+import rooftops from "./assets/images/central-park.jpg";
+
 // USE CONTEXT
 const todayFruits = ["apple", "banana", "carrot", "durain"];
 
@@ -82,6 +87,11 @@ function App() {
         dispatch({ type: ACTIONS.DECREMENT });
     }
 
+    // ASSET
+    const randomImageUrl = "https://picsum.photos/300/200";
+
+    const vidUrl = "https://www.youtube.com/watch?v=cd3P3yXyx30";
+
     return (
         <>
             {/* <Header name={"strange"} color={"purple"} />
@@ -122,7 +132,7 @@ function App() {
             {/* <ToDo /> */}
 
             {/* REACT ROUTER */}
-            <div className="App">
+            {/* <div className="App">
                 <nav className="nav">
                     <Link to="/" className="nav-item">HomePage</Link>
                     <Link to="/about-me" className="nav-item">About me</Link>
@@ -131,7 +141,24 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about-me" element={<AboutMe />} />
                 </Routes>
-            </div>
+            </div> */}
+
+            {/* ASSET */}
+            {/* <img
+                    height={200}
+                    src={require("./assets/images/central-park.jpg")}
+                    alt="An Image of a rootop in New York"
+                /> */}
+            {/* <div>
+                <h1>Task: add theree images with some styling</h1>
+                <img
+                    height={200}
+                    src={rooftops}
+                    alt="An Image of a rootop in New York"
+                />
+                <img height={200} src={randomImageUrl} />
+            </div> */}
+            <ReactPlayer url={vidUrl} playing={false} volume={0.5} controls/>
         </>
     );
 }
