@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 
-const todayMeals = ["Baked Beans", "Baked Sweet Potatos", "Baked Potatoes", "JJJ", "III"];
+const todayMeals = [
+  "Baked Beans",
+  "Baked Sweet Potatos",
+  "Baked Potatoes",
+  "JJJ",
+  "III",
+];
 
 // FOR PROVIDING PART
 // get data
@@ -16,20 +22,16 @@ const MealsProvider = ({ children }) => {
   const [meals, setMealsList] = useState(todayMeals);
 
   function updateMealsList() {
-    console.log(k++);
-    setMealsList((prevMeals) => {
-      prevMeals.pop()
-      
-      return [...prevMeals];
-    });
-  }
+    setMealsList((previousArr) => (previousArr.slice(0, -1)));
 
-  console.log(meals, "hdhsdhj")
+    // const copyArr = [...meals];
+    // copyArr.pop();
+    // setMealsList(copyArr);
+  }
 
   return (
     <MealsContext.Provider value={meals}>
       <MealsUpdateContext.Provider value={updateMealsList}>
-        {JSON.stringify(meals)}
         {children}
       </MealsUpdateContext.Provider>
     </MealsContext.Provider>

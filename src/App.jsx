@@ -1,14 +1,38 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import Header from "../components/Header";
 import Main from "../components/Main";
 import Sidebar from "../components/Sidebar";
 import ModeToggler from "../components/ModeToggler";
 import Heading from "../components/USHook";
+import ToDo from "../components/URToDo";
 import {
   useMealsListContext,
   useMealsUpdateContext,
 } from "./providers/MealsProvider";
 import "./App.css";
+
+// USE CONTEXT
+const todayFruits = ["apple", "banana", "carrot", "durain"];
+
+// USE REDUCER
+const ACTIONS = {
+  INCREMENT: "increment",
+  DECREMENT: "decrement",
+};
+function reducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.INCREMENT:
+      return {
+        count: state.count + 1,
+      };
+    case ACTIONS.DECREMENT:
+      return {
+        count: state.count - 1,
+      };
+    default:
+      return state;
+  }
+}
 
 function App() {
   // function handleClick() {
@@ -19,10 +43,41 @@ function App() {
   // const [word, setWord] = useState("Eat");
 
   // USE CONTEXT
-  const meals = useMealsListContext();
-  // console.log(meals);
+  // const meals = useMealsListContext();
 
-  const removeMeals = useMealsUpdateContext();
+  // const removeMeals = useMealsUpdateContext();
+
+  // const [fruits, setFruits] = useState(todayFruits);
+
+  // const removeFruitHandler = () => {
+  //   setFruits((prevFruits) => {
+  //     const copyArr = [...prevFruits];
+  //     copyArr.pop();
+  //     return copyArr;
+  //   });
+  //   console.log(fruits);
+  // };
+
+  // const removeSpecific = (i) => {
+  //   setFruits((prevFruits) =>
+  //     prevFruits.filter((item) => item != prevFruits[i])
+  //   );
+  // };
+
+  // const onClickHandler = () => {
+  //   alert("heegh");
+  // };
+
+  // USE REDUCER
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  function increment() {
+    dispatch({ type: ACTIONS.INCREMENT });
+  }
+
+  function decrement() {
+    dispatch({ type: ACTIONS.DECREMENT });
+  }
 
   return (
     <>
@@ -36,13 +91,32 @@ function App() {
     <button onClick={handleClick}>Click here</button> */}
 
       {/* USE CONTEXT  */}
-      <div>
+      {/* <div>
         <h1>Meals List using Context API</h1>
         {meals.map((meal, index) => {
           return <h2 key={index}>{meal}</h2>;
         })}
         <button onClick={removeMeals}>Remove</button>
       </div>
+
+      <div>
+        {fruits.map((fruit, index) => {
+          return (
+            <h2 key={index} onClick={() => removeSpecific(index)}>
+              {fruit}
+            </h2>
+          );
+        })}
+
+        <button onClick={removeFruitHandler}>Remove Fruit</button>
+      </div> */}
+
+      {/* USE REDUCER */}
+      {/* <button onClick={decrement}>-</button>
+      <span>{state.count}</span>
+      <button onClick={increment}>+</button> */}
+
+      <ToDo />
     </>
   );
 }
